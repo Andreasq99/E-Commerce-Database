@@ -11,13 +11,19 @@
 An Express.js application for accessing a database of products for an e-commerce company. The application utilizes Express.js and Sequelize, and can be used to carry out CRUD operations on categories of products, individual products, and product description tags.
 
 ## Installation <a name="installation"></a>
-To install the application, first clone the repository. Now enter your user and password in the ".env.EXAMPLE" file, and rename it to just ".env". The .env file is ignored by git, so your user information is safe from commits. In your command line, open MySQL and run "source db/schema.sql;" to create the database. If you wish to use the stock seed data, next you'll want to run "npm run seed".
+To install the application, first clone the repository.
+ 1. Enter your user and password in the "[.env.EXAMPLE](.env.EXAMPLE)" file
+ 2. Rename the "[.env.EXAMPLE](.env.EXAMPLE)" file to just ".env". The .env file is ignored by git, so your user information is safe from commits.
+ 3. In the terminal, open MySQL and run "source db/schema.sql;" to create the database.
+ 4. If you wish to use the stock seed data, run "npm run seed".
 
 Here is a video showing these steps:
     [![A video of me setting up the application.](./assets/seeding-thumbnail.png)](https://drive.google.com/file/d/1zcKEurRV-oqHyss6bcRCUv5Ge5uOxW42/view?usp=drive_link)
 
 ## Usage <a name="usage"></a>
-To start the application, run "npm start" in the terminal. It will log when it is up and running. Now navigate to carry out CRUD operations, navigate to Insomnia and input the address "http://localhost:3001". If you wish to access categories, you can carry out GET, POST, PUT, and DELETE requests at /api/categories, and similarly for products at /api/products and tags at /api/tags.
+1. To start the application, run "npm start" in the terminal. It will log when it is up and running.
+2. To carry out CRUD operations, navigate to Insomnia and input the address "http://localhost:3001". 
+3. If you wish to access categories, you can carry out GET, POST, PUT, and DELETE requests at /api/categories, and similarly for products at /api/products and tags at /api/tags.
 
 Here is a video showing these steps: 
     [![A video of me using the application.](./assets/insomnia-thumbnail.png)](https://drive.google.com/file/d/101OXYHRx4QnwOxVrNQref-tKappoytb8/view)
