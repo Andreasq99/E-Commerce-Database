@@ -33,9 +33,13 @@ router.get('/:id', async(req, res) => {
       {model: Tag}
       ]}
     );
-    res.json(product);
+    if(!product){
+      res.send(`<h1>Product ${req.params.id} does not exist!</h1>`);
+    } else {
+      res.json(product);
+    }
   } catch(err){
-    console.log(err);
+    console.log(err); 
   }
 });
 
@@ -51,6 +55,10 @@ router.post('/', (req, res) => {
   */
   Product.create(req.body)
     .then((product) => {
+
+      if(req.body.category_id){
+        product.category_id=req.body.category_id;
+      }
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -121,10 +129,10 @@ router.delete('/:id', async(req, res) => {
   try{
     const product = await Product.findByPk(req.params.id);
     if(!product){
-      res.send(`<h1>Product ${req.params.id} does not exist!</h1>`);
+      res.send(`<h1>Product "${req.params.id}" does not exist!</h1>`);
     } else{
       await product.destroy();
-      res.send(`<h1>Product ${product.product_name} deleted!</h1>`);
+      res.send(`<h1>Product "${product.product_name}" deleted!</h1>`);
     }
   }catch(err){
     console.log(err);

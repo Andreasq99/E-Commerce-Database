@@ -18,8 +18,12 @@ router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try{
-    const category = await Category.findOne({where: {category_name:req.params.id}}, {include: Product});
-    res.json(category);
+    const category = await Category.findOne({where: {id:req.params.id}}, {include: Product});
+    if(!category){
+      res.send(`<h1>Category ${req.params.id} does not exist!</h1>`);
+    } else {
+      res.json(category);
+    }
   } catch(err){
     console.log(err);
   }
@@ -45,8 +49,8 @@ router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try{
     const category = await Category.findByPk(req.params.id);
-    await category.update({name: req.body.name});
-    res.send(`Category ${req.params.id} renamed to "${req.body.name}"!`);
+    await category.update({category_name: req.body.name});
+    res.send(`<h1>Category ${req.params.id} renamed to "${req.body.name}"!</h1>`);
   } catch(err){
     console.log(err);
   }
@@ -59,6 +63,7 @@ router.delete('/:id', async(req, res) => {
     if(!category){
       res.send(`<h1>Category ${req.params.id} does not exist!</h1>`);
     } else {
+      await Product.destroy({where: {category_id: req.params.id}});
       await category.destroy();
       res.send(`<h1>Category "${category.category_name}" deleted!</h1>`);
     }
