@@ -23,7 +23,11 @@ router.get('/:id', async(req, res) => {
     const tag = await Tag.findByPk(req.params.id,{
       include: [{model: Product}]
     });
-    res.json(tag);
+    if(!tag){
+      res.send(`Tag ${req.params.id} does not exist!`);
+    } else{
+      res.json(tag);
+    }
   } catch(err){
     console.log(err);
   }
